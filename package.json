@@ -5,6 +5,9 @@
   "license": "MIT",
   "repository": "git://github.com/ianstormtaylor/slate.git",
   "main": "./lib/index.js",
+  "engines": {
+    "node": "8.x"
+  },
   "dependencies": {
     "cheerio": "^0.22.0",
     "debug": "^2.3.2",
