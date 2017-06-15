@@ -106,6 +106,7 @@
     "benchs:save": "babel-node ./node_modules/.bin/_matcha --reporter ./benchmark/reporter ./benchmark/index.js > ./tmp/benchmark-baseline.json",
     "prepublish": "npm run build",
     "postpublish": "npm run gh-pages",
+    "postinstall": "npm run examples",
     "release": "np",
     "release:next": "np --tag=next",
     "start": "http-server ./examples",
