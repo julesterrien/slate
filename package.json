@@ -96,7 +96,7 @@
     "build:min": "NODE_ENV=production browserify ./src/index.js --transform babelify --transform envify --transform [ browserify-global-shim --global ] --transform uglifyify --standalone Slate | uglifyjs > ./dist/slate.min.js",
     "build:npm": "babel --out-dir ./lib ./src",
     "build:test": "babel --out-dir ./lib ./src --source-maps inline",
-    "examples": "npm run examples:dev && npm run examples:prod",
+    "examples": "npm run build && npm run disc && npm run examples:dev && npm run examples:prod",
     "examples:dev": "browserify --debug --transform babelify ./examples/index.js > ./examples/build.dev.js",
     "examples:prod": "NODE_ENV=production browserify --transform babelify ./examples/index.js > ./examples/build.prod.js",
     "gh-pages": "npm run build && npm run examples && gh-pages --dist ./examples",
