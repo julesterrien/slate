@@ -9,7 +9,7 @@ import { debounce, negate } from 'lodash';
 const SPELL_CHECK_WAIT_TIME_MS = 3000;
 const SPELL_CHECK_MAX_WAIT_TIME_MS = 30000;
 
-const ignoreSuggestion = ({ rule: { issueType } }) => issueType === 'typographical';
+const ignoreSuggestion = ({ rule: { id } }) => id !== "EN_QUOTES";
 
 const typeIs = (query) => ({ type }) => type === query;
 const typeIsOffset = typeIs('offset');
@@ -30,7 +30,7 @@ const matchesErrorMark = (op, m1) => (m2) => {
 const isSameError = (chars, position, mark, op) => {
   const character = chars.get(position);
   if (!character) {
-    return false3
+    return false;
   }
   return character.marks.some(matchesErrorMark(op, mark));
 };
@@ -125,6 +125,7 @@ const schema = {
 class HoveringMenu extends React.Component {
 
   _request = null;
+  editor = null;
 
   /**
    * Deserialize the raw initial state.
@@ -171,10 +172,12 @@ class HoveringMenu extends React.Component {
 
   onChange = (state) => {
     this.setState({ state });
-    this.debouncedSpellCheck();
-    this.maybeSelectError(state);
 
-    setTimeout(() => this.removeStaleSuggestions(), 0);
+    setTimeout(() => {
+      this.debouncedSpellCheck();
+      this.maybeSelectError();
+      this.removeStaleSuggestions();
+    });
   }
 
   removeStaleSuggestions = () => {
@@ -204,7 +207,7 @@ class HoveringMenu extends React.Component {
     const text = Plain.serialize(this.state.state);
     let suggestions;
 
-    this.setCharacterOffsetMarks();
+    this.addCharacterOffsetMarks();
 
     try {
       this._request = requestSpellCheck(text);
@@ -216,7 +219,7 @@ class HoveringMenu extends React.Component {
     this.markSpellCheckSuggestions(suggestions);
   }
 
-  setCharacterOffsetMarks = () => {
+  addCharacterOffsetMarks = () => {
     let { state } = this.state;
     let offset = 0;
     const transform = state.transform();
@@ -224,12 +227,7 @@ class HoveringMenu extends React.Component {
     state.document.getTextsAsArray().forEach((text) => {
       text.characters.forEach((character, currOffset) => {
         const newMark = { type: 'offset', data: { offset } };
-        const currMark = character.marks.filter(typeIsOffset).first();
-        if (currMark) {
-          transform.setMarkByKey(text.key, currOffset, 1, currMark, newMark);
-        } else {
-          transform.addMarkByKey(text.key, currOffset, 1, newMark);
-        }
+        transform.addMarkByKey(text.key, currOffset, 1, newMark);
         offset = offset + 1;
       });
     });
@@ -242,6 +240,17 @@ class HoveringMenu extends React.Component {
     let { state } = this.state;
     const transform = state.transform();
 
+    // remove offset marks
+    state.document.getTextsAsArray().forEach((text) => {
+      text.characters.forEach((character, currOffset) => {
+        const mark = character.marks.filter(typeIsOffset).first();
+        if (mark) {
+          transform.removeMarkByKey(text.key, currOffset, 1, mark);
+        }
+      });
+    });
+
+    // highlight suggestions
     suggestions
     .filter(negate(ignoreSuggestion))
     .forEach((suggestion) => {
@@ -351,16 +360,27 @@ class HoveringMenu extends React.Component {
 
   onClickReplacement = (e, value) => {
     let { state } = this.state;
+    const { anchorOffset, anchorKey } = state.selection;
+    const newOffset = anchorOffset + value.length;
+    const selection = Selection.create({
+      anchorKey,
+      anchorOffset: newOffset,
+      focusKey: anchorKey,
+      focusOffset: newOffset,
+    });
 
     state = state
       .transform()
       .delete()
       .insertText(value)
+      .select(selection)
       .apply();
 
     this.setState({
       state,
       suggestionOnDisplay: null
+    }, () => {
+      setTimeout(() => this.editor.focus(), 0);
     });
   }
 
@@ -371,6 +391,13 @@ class HoveringMenu extends React.Component {
     const transform = state.transform();
     const length = suggestionOnDisplay.data.get('length');
     const position = suggestionOnDisplay.data.get('position');
+    const newOffset = base + length;
+    const selection = Selection.create({
+      anchorKey: key,
+      anchorOffset: newOffset,
+      focusKey: key,
+      focusOffset: newOffset,
+    });
 
     for (let i = 0; i < length; i++) {
       const character = characters.get(base + i);
@@ -381,9 +408,13 @@ class HoveringMenu extends React.Component {
       transform.addMarkByKey(key, base + i, 1, replace);
     }
 
+    transform.select(selection);
+
     this.setState({
       state: transform.apply(),
       suggestionOnDisplay: null
+    }, () => {
+      setTimeout(() => this.editor.focus(), 0);
     });
   }
 
@@ -403,14 +434,21 @@ class HoveringMenu extends React.Component {
 
     const replacements = suggestionOnDisplay.data.get('replacements');
     const onMouseDown = (e) => this.onIgnoreSuggestion(e);
+    const replacementsList = replacements.length === 0 ? null : (
+      <ul className="suggestion-box-replacements">
+        {replacements.map(this.renderReplacement)}
+      </ul>
+    );
 
     return (
-      <div>
-        {suggestionOnDisplay.data.get('message')}
-        <ul>
-          {replacements.map(this.renderReplacement)}
-        </ul>
-        <div onMouseDown={onMouseDown}>Ignore</div>
+      <div className="suggestion-box">
+        <div className="suggestion-box-header">
+          {suggestionOnDisplay.data.get('message')}
+        </div>
+        {replacementsList}
+        <div onMouseDown={onMouseDown} className="suggestion-box-ignore">
+          Ignore
+        </div>
       </div>
     );
   }
@@ -451,10 +489,13 @@ class HoveringMenu extends React.Component {
    */
 
   renderEditor = () => {
+    const setEditorRef = (ref) => this.editor = ref;
+
     return (
       <div className="editor">
         <Editor
           schema={schema}
+          ref={setEditorRef}
           state={this.state.state}
           onChange={this.onChange}
           spellCheck={false}
@@ -467,8 +508,8 @@ class HoveringMenu extends React.Component {
    * Update the menu's absolute position.
    */
 
-  maybeSelectError = (state) => {
-    const { suggestionOnDisplay } = this.state;
+  maybeSelectError = () => {
+    const { state, suggestionOnDisplay } = this.state;
     const { anchorKey, anchorOffset, focusKey, focusOffset, isCollapsed, isBackward } = state.selection;
 
     const shouldCloseSpellChecker = (
@@ -529,12 +570,18 @@ class HoveringMenu extends React.Component {
       return
     }
 
-    const selection = window.getSelection()
-    const range = selection.getRangeAt(0)
+    let range;
+    try {
+      const selection = window.getSelection();
+      range = selection.getRangeAt(0);
+    } catch (e) {
+      return;
+    }
+
     const rect = range.getBoundingClientRect()
     spellChecker.style.opacity = 1
-    spellChecker.style.top = `${rect.top + window.scrollY - spellChecker.offsetHeight}px`
-    spellChecker.style.left = `${rect.left + window.scrollX - spellChecker.offsetWidth / 2 + rect.width / 2}px`
+    spellChecker.style.top = `${rect.bottom + window.scrollY + 5}px`
+    spellChecker.style.left = `${rect.left + window.scrollX}px`
   }
 }
 

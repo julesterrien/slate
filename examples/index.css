@@ -180,16 +180,43 @@ input:focus {
 }
 
 .hover-menu {
-  padding: 8px 7px 6px;
   position: absolute;
   z-index: 1;
   top: -10000px;
   left: -10000px;
   margin-top: -6px;
   opacity: 0;
-  background-color: #222;
-  border-radius: 4px;
+  border: 1px solid lightgrey;
+  background-color: white;
   transition: opacity .75s;
+  max-width: 200px;
+  padding: 0;
+  box-shadow: 0px 1px 6px lightgrey;
+  font-size: 0.85em;
+}
+
+.suggestion-box-header {
+  padding: 5px;
+  color: gray;
+  font-style: oblique;
+  border-bottom: 1px solid lightgrey;
+}
+
+.suggestion-box-replacements {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px;
+  font-weight: bold;
+  border-bottom: 1px solid lightgrey;
+}
+
+.suggestion-box-replacements > li {
+  cursor: pointer;
+}
+
+.suggestion-box-ignore {
+  cursor: pointer;
+  padding: 5px;
 }
 
 .hover-menu .button {
