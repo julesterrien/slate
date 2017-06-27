@@ -179,6 +179,23 @@ input:focus {
   margin-bottom: 20px;
 }
 
+.citation-hover-menu {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px; /* Negative half of height. */
+  margin-left: -150px; /* Negative half of width. */
+  z-index: 1;
+  border: 1px solid lightgrey;
+  background-color: white;
+  transition: opacity .75s;
+  padding: 0;
+  box-shadow: 0px 1px 6px lightgrey;
+  padding: 15px;
+}
+
 .hover-menu {
   position: absolute;
   z-index: 1;
@@ -254,5 +271,16 @@ input:focus {
 }
 
 .spelling-error {
+  background-color: rgba(255,255,0, 0.3);
+}
+
+.spelling-error-MORFOLOGIK_RULE_EN_US {
   background-color: rgba(255,0,0, 0.2);
+}
+
+.citation {
+  color: inherit;
+  border-bottom: 1px solid rgba(47,131,222,0.5);
+  text-decoration: none;
+  box-shadow: inset 0px -1px rgba(47,131,222,0.5);
 }
