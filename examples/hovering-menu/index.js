@@ -3,13 +3,16 @@ import { Editor, Raw, Plain, Selection } from '../..'
 import Portal from 'react-portal'
 import React from 'react'
 import initialState from './state.json'
+import citations from './citations.json'
 import { requestSpellCheck } from './spell-check'
 import { debounce, negate } from 'lodash';
+
+const DEFAULT_NODE = 'paragraph'
 
 const SPELL_CHECK_WAIT_TIME_MS = 3000;
 const SPELL_CHECK_MAX_WAIT_TIME_MS = 30000;
 
-const ignoreSuggestion = ({ rule: { id } }) => id !== "EN_QUOTES";
+const ignoreSuggestion = ({ rule: { id } }) => id === "EN_QUOTES";
 
 const typeIs = (query) => ({ type }) => type === query;
 const typeIsOffset = typeIs('offset');
@@ -59,9 +62,9 @@ const removeSpellingSuggestion = (transform, key, chars, offset, position, lengt
   }
 };
 
-const unchanged = (characters, offset, length) => {
+const unchanged = (characters, currOffset, offset, length) => {
   for (let i = 1; i < length; i++) {
-    const character = characters.get(offset + i);
+    const character = characters.get(currOffset + i);
     if (!character) {
       return false;
     }
@@ -85,6 +88,7 @@ const addSpellingSuggestion = (key, suggestion, chars, currOffset, transform) =>
         message: suggestion.message,
         shortMessage: suggestion.shortMessage,
         replacements: suggestion.replacements,
+        rule: suggestion.rule,
         ignored: false,
       },
     };
@@ -107,12 +111,52 @@ const removeUnignoredSpellingMarks = (transform, key, offset, character) => {
  */
 
 const schema = {
+  nodes: {
+    'heading-one': props => <h2 {...props.attributes}>{props.children}</h2>,
+    citation: (props) => {
+      const { data } = props.node;
+      const citation = data.get('citation');
+      const { url, title } = citation;
+
+      // Citation hover stuff
+      // const showCitationInfo = data.get('showCitationInfo');
+      // const unshowCitationInfo = data.get('unshowCitationInfo');
+      // const onHover = () => showCitationInfo(citation);
+      // const offHover = () => unshowCitationInfo(citation);
+      // onMouseOver={onHover} onMouseLeave={offHover}
+
+      return (
+        <a
+          {...props.attributes}
+          className="citation"
+          href={url}
+          title={title}
+        >
+          {props.children}
+        </a>
+      );
+    }
+  },
   marks: {
     bold: props => <strong>{props.children}</strong>,
     code: props => <code>{props.children}</code>,
     italic: props => <em>{props.children}</em>,
     underlined: props => <u>{props.children}</u>,
-    spelling: props => props.mark.data.get('ignored') ? <span>{props.children}</span> : <span className="spelling-error">{props.children}</span>,
+    spelling: props => {
+      const { data } = props.mark;
+      const isIgnored = data.get('ignored');
+      if (isIgnored) {
+        return <span>{props.children}</span>;
+      }
+
+      const { issueType, id } = data.get('rule');
+
+      return (
+        <span className={`spelling-error spelling-error-${id}`}>
+          {props.children}
+        </span>
+      );
+    }
   }
 }
 
@@ -135,9 +179,10 @@ class HoveringMenu extends React.Component {
 
   state = {
     menu: null,
+    showCitationTool: false,
     spellChecker: null,
-    suggestionOnDisplay: null,
     state: Raw.deserialize(initialState, { terse: true }),
+    suggestionOnDisplay: null,
   };
 
   /**
@@ -145,11 +190,11 @@ class HoveringMenu extends React.Component {
    */
 
   componentDidMount = () => {
-    this.updateMenu()
+    this.updateSpellCheckerMenu()
   }
 
   componentDidUpdate = () => {
-    this.updateMenu()
+    this.updateSpellCheckerMenu()
   }
 
   /**
@@ -224,12 +269,15 @@ class HoveringMenu extends React.Component {
     let offset = 0;
     const transform = state.transform();
 
-    state.document.getTextsAsArray().forEach((text) => {
-      text.characters.forEach((character, currOffset) => {
-        const newMark = { type: 'offset', data: { offset } };
-        transform.addMarkByKey(text.key, currOffset, 1, newMark);
-        offset = offset + 1;
+    state.document.nodes.forEach((node) => {
+      node.getTextsAsArray().forEach((text) => {
+        text.characters.forEach((character, currOffset) => {
+          const newMark = { type: 'offset', data: { offset } };
+          transform.addMarkByKey(text.key, currOffset, 1, newMark);
+          offset = offset + 1;
+        });
       });
+      offset = offset + 1;
     });
 
     state = transform.apply(false);
@@ -261,7 +309,7 @@ class HoveringMenu extends React.Component {
 
           const mark = character.marks.filter(typeIsOffset).first();
           if (mark && (mark.data.get('offset') === suggestion.offset) &&
-              unchanged(chars, currOffset, suggestion.length) &&
+              unchanged(chars, currOffset, mark.data.get('offset'), suggestion.length) &&
               !ignoredError(chars, currOffset, suggestion.length, suggestion)) {
             addSpellingSuggestion(text.key, suggestion, chars, currOffset, transform);
           }
@@ -330,12 +378,94 @@ class HoveringMenu extends React.Component {
    */
 
   render = () => {
+    // Citation overlay stuff
+    // {this.renderCitationInfo()}
+
     return (
       <div>
         {this.renderMenu()}
         {this.renderSpellChecker()}
+        {this.renderCitationTool()}
+        {this.renderToolbar()}
         {this.renderEditor()}
       </div>
+    )
+  }
+
+  // Citation overlay stuff
+  // showCitationInfo = (citation) => {
+  //   this.setState({ showCitationInfo: citation });
+  // }
+
+  // unshowCitationInfo = (citation) => {
+  //   this.setState({ showCitationInfo: null });
+  // }
+
+  onClickCitation = (e, citation) => {
+    let { state } = this.state
+
+    state = state
+      .transform()
+      .wrapInline({
+        type: 'citation',
+        data: {
+          citation,
+          // Citation overlay stuff
+          // showCitationInfo: this.showCitationInfo,
+          // unshowCitationInfo: this.unshowCitationInfo,
+        }
+      })
+      .collapseToEnd()
+      .focus()
+      .apply()
+
+    this.setState({
+      showCitationTool: false,
+      state,
+    })
+  }
+
+  renderCitationChoice = (citation, i) => {
+    const onClick = (e) => {
+      e.preventDefault()
+      this.onClickCitation(e, citation)
+    }
+
+    return (
+      <li key={i}>
+        <a onClick={onClick} href={citation.url}>
+          {citation.domain} - { citation.title}
+        </a>
+      </li>
+    )
+  }
+
+  onCitationToolClose = () => {
+    this.setState({ showCitationTool: false })
+  }
+
+  /**
+   * Render the citation tool.
+   *
+   * @return {Element}
+   */
+
+  renderCitationTool = () => {
+    const { showCitationTool } = this.state
+    return (
+      <Portal
+        closeOnEsc
+        closeOnOutsideClick
+        isOpened={showCitationTool}
+        onClose={this.onCitationToolClose}
+      >
+        <div className="citation-hover-menu">
+          <strong>Choose Citation</strong>
+          <ul>
+            {citations.map(this.renderCitationChoice)}
+          </ul>
+        </div>
+      </Portal>
     )
   }
 
@@ -359,77 +489,77 @@ class HoveringMenu extends React.Component {
   }
 
   onClickReplacement = (e, value) => {
-    let { state } = this.state;
-    const { anchorOffset, anchorKey } = state.selection;
-    const newOffset = anchorOffset + value.length;
+    let { state } = this.state
+    const { anchorOffset, anchorKey } = state.selection
+    const newOffset = anchorOffset + value.length
     const selection = Selection.create({
       anchorKey,
       anchorOffset: newOffset,
       focusKey: anchorKey,
       focusOffset: newOffset,
-    });
+    })
 
     state = state
       .transform()
       .delete()
       .insertText(value)
       .select(selection)
-      .apply();
+      .apply()
 
     this.setState({
       state,
       suggestionOnDisplay: null
     }, () => {
-      setTimeout(() => this.editor.focus(), 0);
-    });
+      setTimeout(() => this.editor.focus(), 0)
+    })
   }
 
   onIgnoreSuggestion = (e) => {
-    const { state, suggestionOnDisplay } = this.state;
-    const { anchorKey: key, anchorOffset: base } = state.selection;
-    const characters = state.document.getDescendant(key).characters;
-    const transform = state.transform();
-    const length = suggestionOnDisplay.data.get('length');
-    const position = suggestionOnDisplay.data.get('position');
-    const newOffset = base + length;
+    const { state, suggestionOnDisplay } = this.state
+    const { anchorKey: key, anchorOffset: base } = state.selection
+    const characters = state.document.getDescendant(key).characters
+    const transform = state.transform()
+    const length = suggestionOnDisplay.data.get('length')
+    const position = suggestionOnDisplay.data.get('position')
+    const newOffset = base + length
     const selection = Selection.create({
       anchorKey: key,
       anchorOffset: newOffset,
       focusKey: key,
       focusOffset: newOffset,
-    });
+    })
 
     for (let i = 0; i < length; i++) {
-      const character = characters.get(base + i);
-      const remove = character.marks.filter(matchesErrorMark(addX(i - position), suggestionOnDisplay)).first();
-      const newData = remove.data.set('ignored', true);
-      const replace = remove.set('data', newData);
-      transform.removeMarkByKey(key, base + i, 1, remove);
-      transform.addMarkByKey(key, base + i, 1, replace);
+      const character = characters.get(base + i)
+      const remove = character.marks.filter(matchesErrorMark(addX(i - position), suggestionOnDisplay)).first()
+      const newData = remove.data.set('ignored', true)
+      const replace = remove.set('data', newData)
+      transform.removeMarkByKey(key, base + i, 1, remove)
+      transform.addMarkByKey(key, base + i, 1, replace)
     }
 
-    transform.select(selection);
+    transform.select(selection)
 
     this.setState({
       state: transform.apply(),
       suggestionOnDisplay: null
     }, () => {
-      setTimeout(() => this.editor.focus(), 0);
-    });
+      setTimeout(() => this.editor.focus(), 0)
+    })
   }
 
   renderReplacement = ({ value }) => {
-    const onMouseDown = (e) => this.onClickReplacement(e, value);
+    const onMouseDown = e => this.onClickReplacement(e, value)
 
     return (
       <li key={value} onMouseDown={onMouseDown}>{value}</li>
-    );
+    )
   }
 
   renderSuggestionOnDisplay = () => {
-    const { suggestionOnDisplay } = this.state;
+    const { suggestionOnDisplay } = this.state
     if (!suggestionOnDisplay) {
-      return null;
+      return null
     }
 
     const replacements = suggestionOnDisplay.data.get('replacements');
@@ -462,6 +592,27 @@ class HoveringMenu extends React.Component {
       </Portal>
     )
   }
+
+  // renderCitationInfo = () => {
+  //   const { showCitationInfo } = this.state;
+
+  //   return (
+  //     <Portal isOpened={!!showCitationInfo}>
+  //       <div className="menu hover-menu">
+  //         {this.renderCitationOnDisplay()}
+  //       </div>
+  //     </Portal>
+  //   )
+  // }
+
+  // renderCitationOnDisplay = () => {
+  //   const { showCitationInfo } = this.state;
+
+  //   return (
+  //     <div>
+  //     </div>
+  //   );
+  // }
 
   /**
    * Render a mark-toggling toolbar button.
@@ -561,7 +712,7 @@ class HoveringMenu extends React.Component {
     }
   }
 
-  updateMenu = () => {
+  updateSpellCheckerMenu = () => {
     const { spellChecker, suggestionOnDisplay } = this.state
     if (!spellChecker) return
 
@@ -582,6 +733,132 @@ class HoveringMenu extends React.Component {
     spellChecker.style.opacity = 1
     spellChecker.style.top = `${rect.bottom + window.scrollY + 5}px`
     spellChecker.style.left = `${rect.left + window.scrollX}px`
+  }
+
+  /**
+   * When a block button is clicked, toggle the block type.
+   *
+   * @param {Event} e
+   * @param {String} type
+   */
+
+  onClickBlock = (e, type) => {
+    e.preventDefault()
+    let { state } = this.state
+    const transform = state.transform()
+    const { document } = state
+
+    // Handle everything but list buttons.
+    const isActive = this.hasBlock(type)
+    transform
+      .setBlock(isActive ? DEFAULT_NODE : type)
+
+    state = transform.apply()
+    this.setState({ state })
+  }
+
+  /**
+   * Check if the any of the currently selected blocks are of `type`.
+   *
+   * @param {String} type
+   * @return {Boolean}
+   */
+
+  hasBlock = (type) => {
+    const { state } = this.state
+    return state.blocks.some(node => node.type == type)
+  }
+
+  /**
+   * Render a block-toggling toolbar button.
+   *
+   * @param {String} type
+   * @param {String} icon
+   * @return {Element}
+   */
+
+  renderBlockButton = (type, icon) => {
+    const isActive = this.hasBlock(type)
+    const onMouseDown = e => this.onClickBlock(e, type)
+
+    return (
+      <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
+        <span className="material-icons">{icon}</span>
+      </span>
+    )
+  }
+
+  /**
+   * Render a mark-toggling toolbar button.
+   *
+   * @param {String} type
+   * @param {String} icon
+   * @return {Element}
+   */
+
+  renderMarkButton = (type, icon) => {
+    const isActive = this.hasMark(type)
+    const onMouseDown = e => this.onClickMark(e, type)
+
+    return (
+      <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
+        <span className="material-icons">{icon}</span>
+      </span>
+    )
+  }
+
+  /**
+   * Render the toolbar.
+   *
+   * @return {Element}
+   */
+
+  renderToolbar = () => {
+    return (
+      <div className="menu toolbar-menu">
+        {this.renderBlockButton('heading-one', 'title')}
+        {this.renderCiteButton()}
+      </div>
+    )
+  }
+
+  /**
+   * Check whether the current selection has a citation in it.
+   *
+   * @return {Boolean} hasCitations
+   */
+
+  hasCitations = () => {
+    const { state } = this.state
+    return state.inlines.some(inline => inline.type == 'citation')
+  }
+
+  onCite = (e) => {
+    e.preventDefault()
+    let { state } = this.state;
+    const transform = state.transform();
+    const hasCitations = this.hasCitations();
+
+    if (hasCitations) {
+      state = state
+        .transform()
+        .unwrapInline('citation')
+        .collapseToEnd()
+        .focus()
+        .apply();
+      this.setState({ state });
+    } else {
+      this.setState({ showCitationTool: true });
+    }
+  }
+
+  renderCiteButton = () => {
+    const isActive = this.hasMark('citation')
+    return (
+      <span className="button" onClick={this.onCite} data-active={isActive}>
+        <span className="material-icons">link</span>
+      </span>
+    )
   }
 }
 
