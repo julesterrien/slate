@@ -1,68 +1,2784 @@
 {
-  "nodes": [
-    {
-      "kind": "block",
-      "type": "paragraph",
-      "nodes": [
-        {
-          "kind": "text",
-          "ranges": [
-            {
-              "text": "This example shows how you can make a hovering menu appear above your content, which you can use to make text "
+  "document": {
+    "data": {},
+    "kind": "document",
+    "nodes": [
+      {
+        "data": {},
+        "kind": "block",
+        "isVoid": false,
+        "type": "heading-one",
+        "nodes": [
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": "Method",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "data": {},
+        "kind": "block",
+        "isVoid": false,
+        "type": "paragraph",
+        "nodes": [
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": "Click the ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "c",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 0,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 1,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "l",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 2,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 3,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "u",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 4,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "r",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 5,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 6,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "d",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 8,
+                      "position": 7,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "colored"
+                        },
+                        {
+                          "value": "co loured"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " phrases for details on potential errors. ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 2,
+                      "position": 0,
+                      "message": "This sentence does not start with an uppercase letter",
+                      "shortMessage": "",
+                      "replacements": [
+                        {
+                          "value": "Or"
+                        }
+                      ],
+                      "rule": {
+                        "id": "UPPERCASE_SENTENCE_START",
+                        "description": "Checks that a sentence starts with an uppercase letter",
+                        "issueType": "typographical",
+                        "category": {
+                          "id": "CASING",
+                          "name": "Capitalization"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "r",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 2,
+                      "position": 1,
+                      "message": "This sentence does not start with an uppercase letter",
+                      "shortMessage": "",
+                      "replacements": [
+                        {
+                          "value": "Or"
+                        }
+                      ],
+                      "rule": {
+                        "id": "UPPERCASE_SENTENCE_START",
+                        "description": "Checks that a sentence starts with an uppercase letter",
+                        "issueType": "typographical",
+                        "category": {
+                          "id": "CASING",
+                          "name": "Capitalization"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " use this text ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "t",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 0,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 1,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 2,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 3,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "s",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 4,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 5,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 7,
+                      "position": 6,
+                      "message": "Did you mean \"to see\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "to see"
+                        }
+                      ],
+                      "rule": {
+                        "id": "TOO_TO",
+                        "subId": "1",
+                        "description": "too go (to go)",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "CONFUSED_WORDS",
+                          "name": "Commonly Confused Words"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "a",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 2,
+                      "position": 0,
+                      "message": "Use \"a\" instead of 'an' if the following word doesn't start with a vowel sound, e.g. 'a sentence', 'a university'",
+                      "shortMessage": "Wrong article",
+                      "replacements": [
+                        {
+                          "value": "a"
+                        }
+                      ],
+                      "rule": {
+                        "id": "EN_A_VS_AN",
+                        "description": "Use of 'a' vs. 'an'",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "n",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 2,
+                      "position": 1,
+                      "message": "Use \"a\" instead of 'an' if the following word doesn't start with a vowel sound, e.g. 'a sentence', 'a university'",
+                      "shortMessage": "Wrong article",
+                      "replacements": [
+                        {
+                          "value": "a"
+                        }
+                      ],
+                      "rule": {
+                        "id": "EN_A_VS_AN",
+                        "description": "Use of 'a' vs. 'an'",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " few ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 5,
+                      "position": 0,
+                      "message": "Possible typo: you repeated a word",
+                      "shortMessage": "Word repetition",
+                      "replacements": [
+                        {
+                          "value": "of"
+                        }
+                      ],
+                      "rule": {
+                        "id": "ENGLISH_WORD_REPEAT_RULE",
+                        "description": "Word repetition (e.g. 'will will')",
+                        "issueType": "duplication",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "f",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 5,
+                      "position": 1,
+                      "message": "Possible typo: you repeated a word",
+                      "shortMessage": "Word repetition",
+                      "replacements": [
+                        {
+                          "value": "of"
+                        }
+                      ],
+                      "rule": {
+                        "id": "ENGLISH_WORD_REPEAT_RULE",
+                        "description": "Word repetition (e.g. 'will will')",
+                        "issueType": "duplication",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 5,
+                      "position": 2,
+                      "message": "Possible typo: you repeated a word",
+                      "shortMessage": "Word repetition",
+                      "replacements": [
+                        {
+                          "value": "of"
+                        }
+                      ],
+                      "rule": {
+                        "id": "ENGLISH_WORD_REPEAT_RULE",
+                        "description": "Word repetition (e.g. 'will will')",
+                        "issueType": "duplication",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 5,
+                      "position": 3,
+                      "message": "Possible typo: you repeated a word",
+                      "shortMessage": "Word repetition",
+                      "replacements": [
+                        {
+                          "value": "of"
+                        }
+                      ],
+                      "rule": {
+                        "id": "ENGLISH_WORD_REPEAT_RULE",
+                        "description": "Word repetition (e.g. 'will will')",
+                        "issueType": "duplication",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "f",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 5,
+                      "position": 4,
+                      "message": "Possible typo: you repeated a word",
+                      "shortMessage": "Word repetition",
+                      "replacements": [
+                        {
+                          "value": "of"
+                        }
+                      ],
+                      "rule": {
+                        "id": "ENGLISH_WORD_REPEAT_RULE",
+                        "description": "Word repetition (e.g. 'will will')",
+                        "issueType": "duplication",
+                        "category": {
+                          "id": "MISC",
+                          "name": "Miscellaneous"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " the problems that ",
+                "marks": []
+              }
+            ]
+          },
+          {
+            "data": {
+              "citation": {
+                "url": "https://ibm.com/",
+                "domain": "ibm.com",
+                "title": "IBM"
+              }
             },
-            {
-              "text": "bold",
-              "marks": [
-                {
-                  "type": "bold"
-                }
-              ]
+            "kind": "inline",
+            "isVoid": false,
+            "type": "citation",
+            "nodes": [
+              {
+                "kind": "text",
+                "ranges": [
+                  {
+                    "kind": "range",
+                    "text": "LanguageTool",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": " can ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "d",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 6,
+                      "position": 0,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "detect"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 6,
+                      "position": 1,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "detect"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "t",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 6,
+                      "position": 2,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "detect"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 6,
+                      "position": 3,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "detect"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "c",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 6,
+                      "position": 4,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "detect"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "d",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 6,
+                      "position": 5,
+                      "message": "Possible spelling mistake found",
+                      "shortMessage": "Spelling mistake",
+                      "replacements": [
+                        {
+                          "value": "detect"
+                        }
+                      ],
+                      "rule": {
+                        "id": "MORFOLOGIK_RULE_EN_US",
+                        "description": "Possible spelling mistake",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": ". What ",
+                "marks": []
+              }
+            ]
+          },
+          {
+            "data": {
+              "citation": {
+                "url": "https://google.ca/",
+                "domain": "google.ca",
+                "title": "Google"
+              }
             },
-            {
-              "text": ", "
-            },
-            {
-              "text": "italic",
-              "marks": [
-                {
-                  "type": "italic"
-                }
-              ]
-            },
-            {
-              "text": ", or anything else you might want to do!"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "kind": "block",
-      "type": "paragraph",
-      "nodes": [
-        {
-          "kind": "text",
-          "ranges": [
-            {
-              "text": "Try it out yourself! Just "
-            },
-            {
-              "text": "select any piece of text and the menu will appear",
-              "marks": [
-                {
-                  "type": "bold"
-                },
-                {
-                  "type": "italic"
-                }
-              ]
-            },
-            {
-              "text": "."
-            }
-          ]
-        }
-      ]
-    }
-  ]
+            "kind": "inline",
+            "isVoid": false,
+            "type": "citation",
+            "nodes": [
+              {
+                "kind": "text",
+                "ranges": [
+                  {
+                    "kind": "range",
+                    "text": "do you ",
+                    "marks": []
+                  },
+                  {
+                    "kind": "range",
+                    "text": "t",
+                    "marks": [
+                      {
+                        "data": {
+                          "length": 6,
+                          "position": 0,
+                          "message": "The pronoun 'you' must be used with a non-third-person form of a verb: \"think\"",
+                          "shortMessage": "Grammatical problem: agreement error",
+                          "replacements": [
+                            {
+                              "value": "think"
+                            }
+                          ],
+                          "rule": {
+                            "id": "NON3PRS_VERB",
+                            "subId": "4",
+                            "description": "Agreement error: Third person verb with a non-third person pronoun",
+                            "issueType": "grammar",
+                            "category": {
+                              "id": "GRAMMAR",
+                              "name": "Grammar"
+                            }
+                          },
+                          "ignored": false
+                        },
+                        "kind": "mark",
+                        "type": "spelling"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "range",
+                    "text": "h",
+                    "marks": [
+                      {
+                        "data": {
+                          "length": 6,
+                          "position": 1,
+                          "message": "The pronoun 'you' must be used with a non-third-person form of a verb: \"think\"",
+                          "shortMessage": "Grammatical problem: agreement error",
+                          "replacements": [
+                            {
+                              "value": "think"
+                            }
+                          ],
+                          "rule": {
+                            "id": "NON3PRS_VERB",
+                            "subId": "4",
+                            "description": "Agreement error: Third person verb with a non-third person pronoun",
+                            "issueType": "grammar",
+                            "category": {
+                              "id": "GRAMMAR",
+                              "name": "Grammar"
+                            }
+                          },
+                          "ignored": false
+                        },
+                        "kind": "mark",
+                        "type": "spelling"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "range",
+                    "text": "i",
+                    "marks": [
+                      {
+                        "data": {
+                          "length": 6,
+                          "position": 2,
+                          "message": "The pronoun 'you' must be used with a non-third-person form of a verb: \"think\"",
+                          "shortMessage": "Grammatical problem: agreement error",
+                          "replacements": [
+                            {
+                              "value": "think"
+                            }
+                          ],
+                          "rule": {
+                            "id": "NON3PRS_VERB",
+                            "subId": "4",
+                            "description": "Agreement error: Third person verb with a non-third person pronoun",
+                            "issueType": "grammar",
+                            "category": {
+                              "id": "GRAMMAR",
+                              "name": "Grammar"
+                            }
+                          },
+                          "ignored": false
+                        },
+                        "kind": "mark",
+                        "type": "spelling"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "range",
+                    "text": "n",
+                    "marks": [
+                      {
+                        "data": {
+                          "length": 6,
+                          "position": 3,
+                          "message": "The pronoun 'you' must be used with a non-third-person form of a verb: \"think\"",
+                          "shortMessage": "Grammatical problem: agreement error",
+                          "replacements": [
+                            {
+                              "value": "think"
+                            }
+                          ],
+                          "rule": {
+                            "id": "NON3PRS_VERB",
+                            "subId": "4",
+                            "description": "Agreement error: Third person verb with a non-third person pronoun",
+                            "issueType": "grammar",
+                            "category": {
+                              "id": "GRAMMAR",
+                              "name": "Grammar"
+                            }
+                          },
+                          "ignored": false
+                        },
+                        "kind": "mark",
+                        "type": "spelling"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "range",
+                    "text": "k",
+                    "marks": [
+                      {
+                        "data": {
+                          "length": 6,
+                          "position": 4,
+                          "message": "The pronoun 'you' must be used with a non-third-person form of a verb: \"think\"",
+                          "shortMessage": "Grammatical problem: agreement error",
+                          "replacements": [
+                            {
+                              "value": "think"
+                            }
+                          ],
+                          "rule": {
+                            "id": "NON3PRS_VERB",
+                            "subId": "4",
+                            "description": "Agreement error: Third person verb with a non-third person pronoun",
+                            "issueType": "grammar",
+                            "category": {
+                              "id": "GRAMMAR",
+                              "name": "Grammar"
+                            }
+                          },
+                          "ignored": false
+                        },
+                        "kind": "mark",
+                        "type": "spelling"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "range",
+                    "text": "s",
+                    "marks": [
+                      {
+                        "data": {
+                          "length": 6,
+                          "position": 5,
+                          "message": "The pronoun 'you' must be used with a non-third-person form of a verb: \"think\"",
+                          "shortMessage": "Grammatical problem: agreement error",
+                          "replacements": [
+                            {
+                              "value": "think"
+                            }
+                          ],
+                          "rule": {
+                            "id": "NON3PRS_VERB",
+                            "subId": "4",
+                            "description": "Agreement error: Third person verb with a non-third person pronoun",
+                            "issueType": "grammar",
+                            "category": {
+                              "id": "GRAMMAR",
+                              "name": "Grammar"
+                            }
+                          },
+                          "ignored": false
+                        },
+                        "kind": "mark",
+                        "type": "spelling"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "range",
+                    "text": " of grammar",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": " checkers? Please ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "n",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 3,
+                      "position": 0,
+                      "message": "Did you mean \"note\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "note"
+                        }
+                      ],
+                      "rule": {
+                        "id": "PLEASE_NOT_THAT",
+                        "subId": "1",
+                        "description": "please not (note) that",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 3,
+                      "position": 1,
+                      "message": "Did you mean \"note\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "note"
+                        }
+                      ],
+                      "rule": {
+                        "id": "PLEASE_NOT_THAT",
+                        "subId": "1",
+                        "description": "please not (note) that",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "t",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 3,
+                      "position": 2,
+                      "message": "Did you mean \"note\"?",
+                      "shortMessage": "Possible typo",
+                      "replacements": [
+                        {
+                          "value": "note"
+                        }
+                      ],
+                      "rule": {
+                        "id": "PLEASE_NOT_THAT",
+                        "subId": "1",
+                        "description": "please not (note) that",
+                        "issueType": "misspelling",
+                        "category": {
+                          "id": "TYPOS",
+                          "name": "Possible Typo"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " that they are not perfect. Issues that aren't spelling-related get a yellow marker: It's 5 ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "P",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 0,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": ".",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 1,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "M",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 2,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": ".",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 3,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 4,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "i",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 5,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "n",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 6,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 7,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "t",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 8,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "h",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 9,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 10,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 11,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "a",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 12,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "f",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 13,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "t",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 14,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 15,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "r",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 16,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "n",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 17,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 18,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "o",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 19,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "n",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 21,
+                      "position": 20,
+                      "message": "Consider using \"P.M.\"",
+                      "shortMessage": "Redundant phrase",
+                      "replacements": [
+                        {
+                          "value": "P.M."
+                        }
+                      ],
+                      "rule": {
+                        "id": "PM_IN_THE_EVENING",
+                        "subId": "3",
+                        "description": "PM in the evening (PM)",
+                        "issueType": "style",
+                        "category": {
+                          "id": "REDUNDANCY",
+                          "name": "Redundant Phrases"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": ". LanguageTool 3.6 was released on ",
+                "marks": []
+              },
+              {
+                "kind": "range",
+                "text": "T",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 0,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "u",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 1,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 2,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "s",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 3,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "d",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 4,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "a",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 5,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "y",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 6,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": ",",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 7,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 8,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "2",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 9,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "8",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 10,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 11,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "D",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 12,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 13,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "c",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 14,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 15,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "m",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 16,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "b",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 17,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "e",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 18,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "r",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 19,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": " ",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 20,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "2",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 21,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "0",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 22,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "1",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 23,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": "6",
+                "marks": [
+                  {
+                    "data": {
+                      "length": 25,
+                      "position": 24,
+                      "message": "The date 28 December 2016 is not a Tuesday, but a Wednesday.",
+                      "shortMessage": "",
+                      "replacements": [],
+                      "rule": {
+                        "id": "DATE_WEEKDAY",
+                        "subId": "1",
+                        "description": "Weekday doesn't match date",
+                        "issueType": "inconsistency",
+                        "category": {
+                          "id": "SEMANTICS",
+                          "name": "Semantic"
+                        }
+                      },
+                      "ignored": false
+                    },
+                    "kind": "mark",
+                    "type": "spelling"
+                  }
+                ]
+              },
+              {
+                "kind": "range",
+                "text": ".",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "kind": "state"
 }
