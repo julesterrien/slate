@@ -1,83 +1,87 @@
 
-import { Editor, Raw, Plain, Selection } from '../..'
+import { Editor, Raw, Plain, Selection, Mark } from '../..'
 import Portal from 'react-portal'
 import React from 'react'
 import initialState from './state.json'
 import citations from './citations.json'
 import { requestSpellCheck } from './spell-check'
-import { debounce, negate } from 'lodash';
+import { debounce, negate } from 'lodash'
 
 const DEFAULT_NODE = 'paragraph'
 
-const SPELL_CHECK_WAIT_TIME_MS = 3000;
-const SPELL_CHECK_MAX_WAIT_TIME_MS = 30000;
+const SPELL_CHECK_WAIT_TIME_MS = 3000
+const SPELL_CHECK_MAX_WAIT_TIME_MS = 30000
 
-const ignoreSuggestion = ({ rule: { id } }) => id === "EN_QUOTES";
+// eslint-disable-next-line func-style
+const ignoreSuggestion = ({ rule: { id }}) => id === 'EN_QUOTES'
 
-const typeIs = (query) => ({ type }) => type === query;
-const typeIsOffset = typeIs('offset');
-const typeIsSpelling = typeIs('spelling');
+// eslint-disable-next-line func-style
+const typeIs = query => ({ type }) => type === query
+const typeIsOffset = typeIs('offset')
+const typeIsSpelling = typeIs('spelling')
 
-const addX = (x) => (y) => x + y;
-const add1 = addX(1);
-const sub1 = addX(-1);
+// eslint-disable-next-line func-style
+const addX = x => y => x + y
+const add1 = addX(1)
+const sub1 = addX(-1)
 
+// eslint-disable-next-line func-style
 const matchesErrorMark = (op, m1) => (m2) => {
-  const p1 = m1.data.get('position');
-  const p2 = m2.data.get('position');
-  const c1 = m1.data.get('message');
-  const c2 = m2.data.get('message');
-  return c1 === c2 && op(p1) === p2;
-};
+  const p1 = m1.data.get('position')
+  const p2 = m2.data.get('position')
+  const c1 = m1.data.get('message')
+  const c2 = m2.data.get('message')
+  return c1 === c2 && op(p1) === p2
+}
 
-const isSameError = (chars, position, mark, op) => {
-  const character = chars.get(position);
+function isSameError(chars, position, mark, op) {
+  const character = chars.get(position)
   if (!character) {
-    return false;
+    return false
   }
-  return character.marks.some(matchesErrorMark(op, mark));
-};
+  return character.marks.some(matchesErrorMark(op, mark))
+}
 
-const ignoredError = (chars, offset, length, suggestion) => {
-  const character = chars.get(offset);
+function ignoredError(chars, offset, length, suggestion) {
+  const character = chars.get(offset)
   return character.marks.filter(typeIsSpelling).reduce((memo, mark) => {
     return memo || (
       mark.data.get('message') === suggestion.message &&
       mark.data.get('ignored')
-    );
-  }, false);
-};
+    )
+  }, false)
+}
 
-const removeSpellingSuggestion = (transform, key, chars, offset, position, length, mark) => {
-  const base = offset - position;
+function removeSpellingSuggestion(transform, key, chars, offset, position, length, mark) {
+  const base = offset - position
 
   for (let i = 0; i < length; i++) {
-    const character = chars.get(base + i);
+    const character = chars.get(base + i)
     if (character) {
-      const remove = character.marks.filter(matchesErrorMark(addX(i - position), mark)).first();
+      const remove = character.marks.filter(matchesErrorMark(addX(i - position), mark)).first()
       if (remove) {
-        transform.removeMarkByKey(key, base + i, 1, remove);
+        transform.removeMarkByKey(key, base + i, 1, remove)
       }
     }
   }
-};
+}
 
-const unchanged = (characters, currOffset, offset, length) => {
+function unchanged(characters, currOffset, offset, length) {
   for (let i = 1; i < length; i++) {
-    const character = characters.get(currOffset + i);
+    const character = characters.get(currOffset + i)
     if (!character) {
-      return false;
+      return false
     }
-    const mark = character.marks.filter(typeIsOffset).first();
+    const mark = character.marks.filter(typeIsOffset).first()
     if (!mark || (mark.data.get('offset') !== offset + i)) {
-      return false;
+      return false
     }
   }
-  return true;
-};
+  return true
+}
 
-const addSpellingSuggestion = (key, suggestion, chars, currOffset, transform) => {
-  const length = Math.min(suggestion.length, chars.size - currOffset);
+function addSpellingSuggestion(key, suggestion, chars, currOffset, transform) {
+  const length = Math.min(suggestion.length, chars.size - currOffset)
 
   for (let i = 0; i < length; i++) {
     const mark = {
@@ -91,18 +95,18 @@ const addSpellingSuggestion = (key, suggestion, chars, currOffset, transform) =>
         rule: suggestion.rule,
         ignored: false,
       },
-    };
-    transform.addMarkByKey(key, currOffset + i, 1, mark);
+    }
+    transform.addMarkByKey(key, currOffset + i, 1, mark)
   }
-};
+}
 
-const removeUnignoredSpellingMarks = (transform, key, offset, character) => {
+function removeUnignoredSpellingMarks(transform, key, offset, character) {
   character.marks.filter(typeIsSpelling).forEach((mark) => {
     if (!mark.data.get('ignored')) {
-      transform.removeMarkByKey(key, offset, 1, mark);
+      transform.removeMarkByKey(key, offset, 1, mark)
     }
-  });
-};
+  })
+}
 
 /**
  * Define a schema.
@@ -114,15 +118,15 @@ const schema = {
   nodes: {
     'heading-one': props => <h2 {...props.attributes}>{props.children}</h2>,
     citation: (props) => {
-      const { data } = props.node;
-      const citation = data.get('citation');
-      const { url, title } = citation;
+      const { data } = props.node
+      const citation = data.get('citation')
+      const { url, title } = citation
 
       // Citation hover stuff
-      // const showCitationInfo = data.get('showCitationInfo');
-      // const unshowCitationInfo = data.get('unshowCitationInfo');
-      // const onHover = () => showCitationInfo(citation);
-      // const offHover = () => unshowCitationInfo(citation);
+      // const showCitationInfo = data.get('showCitationInfo')
+      // const unshowCitationInfo = data.get('unshowCitationInfo')
+      // const onHover = () => showCitationInfo(citation)
+      // const offHover = () => unshowCitationInfo(citation)
       // onMouseOver={onHover} onMouseLeave={offHover}
 
       return (
@@ -134,7 +138,7 @@ const schema = {
         >
           {props.children}
         </a>
-      );
+      )
     }
   },
   marks: {
@@ -142,20 +146,20 @@ const schema = {
     code: props => <code>{props.children}</code>,
     italic: props => <em>{props.children}</em>,
     underlined: props => <u>{props.children}</u>,
-    spelling: props => {
-      const { data } = props.mark;
-      const isIgnored = data.get('ignored');
+    spelling: (props) => {
+      const { data } = props.mark
+      const isIgnored = data.get('ignored')
       if (isIgnored) {
-        return <span>{props.children}</span>;
+        return <span>{props.children}</span>
       }
 
-      const { issueType, id } = data.get('rule');
+      const { id } = data.get('rule')
 
       return (
         <span className={`spelling-error spelling-error-${id}`}>
           {props.children}
         </span>
-      );
+      )
     }
   }
 }
@@ -168,8 +172,8 @@ const schema = {
 
 class HoveringMenu extends React.Component {
 
-  _request = null;
-  editor = null;
+  _request = null
+  editor = null
 
   /**
    * Deserialize the raw initial state.
@@ -183,7 +187,7 @@ class HoveringMenu extends React.Component {
     spellChecker: null,
     state: Raw.deserialize(initialState, { terse: true }),
     suggestionOnDisplay: null,
-  };
+  }
 
   /**
    * On update, update the menu.
@@ -191,6 +195,12 @@ class HoveringMenu extends React.Component {
 
   componentDidMount = () => {
     this.updateSpellCheckerMenu()
+  }
+
+  componentWillUnmount = () => {
+    if (this._request) {
+      this._request.abort()
+    }
   }
 
   componentDidUpdate = () => {
@@ -216,119 +226,160 @@ class HoveringMenu extends React.Component {
    */
 
   onChange = (state) => {
-    this.setState({ state });
+    this.setState({ state })
 
     setTimeout(() => {
-      this.debouncedSpellCheck();
-      this.maybeSelectError();
-      this.removeStaleSuggestions();
-    });
+      this.debouncedSpellCheck()
+      this.maybeSelectError()
+      this.removeStaleSuggestions()
+    })
   }
 
   removeStaleSuggestions = () => {
-    let { state } = this.state;
-    const transform = state.transform();
+    let { state } = this.state
+    const transform = state.transform()
 
     state.document.getTextsAsArray().forEach((text) => {
       text.characters.forEach((character, offset, chars) => {
-        const mark = character.marks.filter(typeIsSpelling).first();
+        const mark = character.marks.filter(typeIsSpelling).first()
         if (mark) {
-          const length = mark.data.get('length');
-          const position = mark.data.get('position');
+          const length = mark.data.get('length')
+          const position = mark.data.get('position')
           if ((position + 1 < length && !isSameError(chars, offset + 1, mark, add1)) ||
               (position > 0 && !isSameError(chars, offset - 1, mark, sub1))) {
-            removeSpellingSuggestion(transform, text.key, chars, offset, position, length, mark);
+            removeSpellingSuggestion(transform, text.key, chars, offset, position, length, mark)
           }
         }
-      });
-    });
+      })
+    })
 
 
-    state = transform.apply(false);
-    this.setState({ state });
+    state = transform.apply(false)
+    this.setState({ state })
   }
 
   spellCheck = async () => {
-    const text = Plain.serialize(this.state.state);
-    let suggestions;
+    let { state } = this.state
+    const text = Plain.serialize(this.state.state)
+    let suggestions
 
-    this.addCharacterOffsetMarks();
+    state = this.addCharacterOffsetMarks(state)
+    this.setState({ state })
 
     try {
-      this._request = requestSpellCheck(text);
-      suggestions = await this._request;
+      this._request = requestSpellCheck(text)
+      suggestions = await this._request
     } finally {
-      this._request = null;
+      this._request = null
     }
 
-    this.markSpellCheckSuggestions(suggestions);
+    ({ state } = this.state)
+    state = this.markSpellCheckSuggestions(state, suggestions)
+    state = this.removeCharacterOffsetMarks(state)
+
+    this.setState({ state })
   }
 
-  addCharacterOffsetMarks = () => {
-    let { state } = this.state;
-    let offset = 0;
-    const transform = state.transform();
-
-    state.document.nodes.forEach((node) => {
-      node.getTextsAsArray().forEach((text) => {
-        text.characters.forEach((character, currOffset) => {
-          const newMark = { type: 'offset', data: { offset } };
-          transform.addMarkByKey(text.key, currOffset, 1, newMark);
-          offset = offset + 1;
-        });
-      });
-      offset = offset + 1;
-    });
-
-    state = transform.apply(false);
-    this.setState({ state });
-  }
-
-  markSpellCheckSuggestions = (suggestions) => {
-    let { state } = this.state;
-    const transform = state.transform();
-
-    // remove offset marks
-    state.document.getTextsAsArray().forEach((text) => {
-      text.characters.forEach((character, currOffset) => {
-        const mark = character.marks.filter(typeIsOffset).first();
-        if (mark) {
-          transform.removeMarkByKey(text.key, currOffset, 1, mark);
+  addCharacterOffsetMarksToNodes = (nodes, startingOffset) => {
+    let offset = startingOffset
+    const mapped = nodes.map((child) => {
+      if (child.kind != 'text') {
+        let childNodes;
+        [childNodes, offset] = this.addCharacterOffsetMarksToNodes(child.nodes, offset)
+        child = child.set('nodes', childNodes)
+        if (child.kind === 'block') {
+          offset = offset + 1
         }
-      });
-    });
+        return child
+      }
 
-    // highlight suggestions
+      const characters = child.characters.map((ch, i) => {
+        let { marks } = ch
+        const mark = Mark.create({ type: 'offset', data: { offset }})
+        marks = marks.add(mark)
+        offset = offset + 1
+        return ch.set('marks', marks)
+      })
+      return child.set('characters', characters)
+    })
+
+    return [mapped, offset]
+  }
+
+  addCharacterOffsetMarks = (state) => {
+    console.time('addCharacterOffsetMarks') // eslint-disable-line no-console
+    let { document } = state
+    let { nodes } = document;
+    [nodes] = this.addCharacterOffsetMarksToNodes(nodes, 0)
+    document = document.set('nodes', nodes)
+    state = state.set('document', document)
+    console.timeEnd('addCharacterOffsetMarks') // eslint-disable-line no-console
+    return state
+  }
+
+  removeCharacterOffsetMarksFromNodes = (nodes) => {
+    return nodes.map((child) => {
+      if (child.kind != 'text') {
+        const childNodes = this.removeCharacterOffsetMarksFromNodes(child.nodes)
+        child = child.set('nodes', childNodes)
+        return child
+      }
+
+      const characters = child.characters.map((ch, i) => {
+        let { marks } = ch
+        marks = marks.filter(negate(typeIsOffset))
+        return ch.set('marks', marks)
+      })
+      return child.set('characters', characters)
+    })
+  }
+
+  removeCharacterOffsetMarks = (state) => {
+    console.time('removeCharacterOffsetMarks') // eslint-disable-line no-console
+    let { document } = state
+    let { nodes } = document
+    nodes = this.removeCharacterOffsetMarksFromNodes(nodes)
+    document = document.set('nodes', nodes)
+    state = state.set('document', document)
+    console.timeEnd('removeCharacterOffsetMarks') // eslint-disable-line no-console
+    return state
+  }
+
+  markSpellCheckSuggestions = (state, suggestions) => {
+    const transform = state.transform()
+
+    console.time('markSpellCheckSuggestions - highlight suggestions') // eslint-disable-line no-console
     suggestions
-    .filter(negate(ignoreSuggestion))
-    .forEach((suggestion) => {
-      state.document.getTextsAsArray().forEach((text) => {
-        const chars = text.characters;
-        chars.forEach((character, currOffset) => {
-          removeUnignoredSpellingMarks(transform, text.key, currOffset, character);
+      .filter(negate(ignoreSuggestion))
+      .forEach((suggestion) => {
+        state.document.getTextsAsArray().forEach((text) => {
+          const chars = text.characters
+          chars.forEach((character, currOffset) => {
+            removeUnignoredSpellingMarks(transform, text.key, currOffset, character)
 
-          const mark = character.marks.filter(typeIsOffset).first();
-          if (mark && (mark.data.get('offset') === suggestion.offset) &&
-              unchanged(chars, currOffset, mark.data.get('offset'), suggestion.length) &&
-              !ignoredError(chars, currOffset, suggestion.length, suggestion)) {
-            addSpellingSuggestion(text.key, suggestion, chars, currOffset, transform);
-          }
-        });
-      });
-    });
+            const mark = character.marks.filter(typeIsOffset).first()
+            if (mark && (mark.data.get('offset') === suggestion.offset) &&
+                unchanged(chars, currOffset, mark.data.get('offset'), suggestion.length) &&
+                !ignoredError(chars, currOffset, suggestion.length, suggestion)) {
+              addSpellingSuggestion(text.key, suggestion, chars, currOffset, transform)
+              return false
+            }
+          })
+        })
+      })
+    console.timeEnd('markSpellCheckSuggestions - highlight suggestions') // eslint-disable-line no-console
 
-    state = transform.apply(false);
-    this.setState({ state });
+    return transform.apply(false)
   }
 
   maybeSpellCheck = () => {
     if (!this._request) {
-      this.spellCheck();
+      this.spellCheck()
     } else {
       // Request could be taking longer than the SPELL_CHECK_WAIT_TIME_MS so we
       // can queue up another request to take place after
       // SPELL_CHECK_WAIT_TIME_MS
-      this.debouncedSpellCheck();
+      this.debouncedSpellCheck()
     }
   }
 
@@ -336,7 +387,7 @@ class HoveringMenu extends React.Component {
     () => this.maybeSpellCheck(),
     SPELL_CHECK_WAIT_TIME_MS,
     { maxWait: SPELL_CHECK_MAX_WAIT_TIME_MS }
-  );
+  )
 
   /**
    * When a mark button is clicked, toggle the current mark.
@@ -394,11 +445,11 @@ class HoveringMenu extends React.Component {
 
   // Citation overlay stuff
   // showCitationInfo = (citation) => {
-  //   this.setState({ showCitationInfo: citation });
+  //   this.setState({ showCitationInfo: citation })
   // }
 
   // unshowCitationInfo = (citation) => {
-  //   this.setState({ showCitationInfo: null });
+  //   this.setState({ showCitationInfo: null })
   // }
 
   onClickCitation = (e, citation) => {
@@ -562,13 +613,13 @@ class HoveringMenu extends React.Component {
       return null
     }
 
-    const replacements = suggestionOnDisplay.data.get('replacements');
-    const onMouseDown = (e) => this.onIgnoreSuggestion(e);
+    const replacements = suggestionOnDisplay.data.get('replacements')
+    const onMouseDown = e => this.onIgnoreSuggestion(e)
     const replacementsList = replacements.length === 0 ? null : (
       <ul className="suggestion-box-replacements">
         {replacements.map(this.renderReplacement)}
       </ul>
-    );
+    )
 
     return (
       <div className="suggestion-box">
@@ -580,7 +631,7 @@ class HoveringMenu extends React.Component {
           Ignore
         </div>
       </div>
-    );
+    )
   }
 
   renderSpellChecker = () => {
@@ -593,8 +644,9 @@ class HoveringMenu extends React.Component {
     )
   }
 
+  // RENDER CITATION INFO
   // renderCitationInfo = () => {
-  //   const { showCitationInfo } = this.state;
+  //   const { showCitationInfo } = this.state
 
   //   return (
   //     <Portal isOpened={!!showCitationInfo}>
@@ -606,12 +658,12 @@ class HoveringMenu extends React.Component {
   // }
 
   // renderCitationOnDisplay = () => {
-  //   const { showCitationInfo } = this.state;
+  //   const { showCitationInfo } = this.state
 
   //   return (
   //     <div>
   //     </div>
-  //   );
+  //   )
   // }
 
   /**
@@ -640,7 +692,7 @@ class HoveringMenu extends React.Component {
    */
 
   renderEditor = () => {
-    const setEditorRef = (ref) => this.editor = ref;
+    const setEditorRef = ref => this.editor = ref
 
     return (
       <div className="editor">
@@ -660,55 +712,55 @@ class HoveringMenu extends React.Component {
    */
 
   maybeSelectError = () => {
-    const { state, suggestionOnDisplay } = this.state;
-    const { anchorKey, anchorOffset, focusKey, focusOffset, isCollapsed, isBackward } = state.selection;
+    const { state, suggestionOnDisplay } = this.state
+    const { anchorKey, anchorOffset, focusKey, focusOffset, isCollapsed, isBackward } = state.selection
 
     const shouldCloseSpellChecker = (
       state.isBlurred ||
       isBackward ||
       focusKey !== anchorKey ||
       (suggestionOnDisplay && isCollapsed)
-    );
+    )
     if (shouldCloseSpellChecker) {
-      this.setState({ suggestionOnDisplay: null });
-      return;
+      this.setState({ suggestionOnDisplay: null })
+      return
     }
 
-    const length = focusOffset - anchorOffset;
-    const text = state.document.getDescendant(anchorKey);
-    const character = text.characters.get(anchorOffset);
+    const length = focusOffset - anchorOffset
+    const text = state.document.getDescendant(anchorKey)
+    const character = text.characters.get(anchorOffset)
     if (!character) {
-      this.setState({ suggestionOnDisplay: null });
-      return;
+      this.setState({ suggestionOnDisplay: null })
+      return
     }
-    const suggestions = character.marks.filter(typeIsSpelling);
+    const suggestions = character.marks.filter(typeIsSpelling)
     if (suggestions.size === 0) {
-      this.setState({ suggestionOnDisplay: null });
-      return;
+      this.setState({ suggestionOnDisplay: null })
+      return
     }
 
     if (length === 0) {
-      const suggestion = suggestions.first();
+      const suggestion = suggestions.first()
       if (suggestion.data.get('ignored')) {
-        return;
+        return
       }
 
-      const transform = state.transform();
-      const newAnchorOffset = anchorOffset - suggestion.data.get('position');
-      const newFocusOffset = newAnchorOffset + suggestion.data.get('length');
+      const transform = state.transform()
+      const newAnchorOffset = anchorOffset - suggestion.data.get('position')
+      const newFocusOffset = newAnchorOffset + suggestion.data.get('length')
       const newState = transform
         .moveOffsetsTo(newAnchorOffset, newFocusOffset)
-        .apply(false);
-      this.setState({ state: newState, suggestionOnDisplay: suggestion });
-      return;
+        .apply(false)
+      this.setState({ state: newState, suggestionOnDisplay: suggestion })
+      return
     }
 
     const suggestion = suggestions
-      .filter((mark) => mark.data.get('position') === 0)
-      .filter((mark) => mark.data.get('length') === length)
-      .first();
+      .filter(mark => mark.data.get('position') === 0)
+      .filter(mark => mark.data.get('length') === length)
+      .first()
     if (!suggestion) {
-      this.setState({ suggestionOnDisplay: null });
+      this.setState({ suggestionOnDisplay: null })
     }
   }
 
@@ -721,12 +773,12 @@ class HoveringMenu extends React.Component {
       return
     }
 
-    let range;
+    let range
     try {
-      const selection = window.getSelection();
-      range = selection.getRangeAt(0);
+      const selection = window.getSelection()
+      range = selection.getRangeAt(0)
     } catch (e) {
-      return;
+      return
     }
 
     const rect = range.getBoundingClientRect()
@@ -746,7 +798,6 @@ class HoveringMenu extends React.Component {
     e.preventDefault()
     let { state } = this.state
     const transform = state.transform()
-    const { document } = state
 
     // Handle everything but list buttons.
     const isActive = this.hasBlock(type)
@@ -835,9 +886,8 @@ class HoveringMenu extends React.Component {
 
   onCite = (e) => {
     e.preventDefault()
-    let { state } = this.state;
-    const transform = state.transform();
-    const hasCitations = this.hasCitations();
+    let { state } = this.state
+    const hasCitations = this.hasCitations()
 
     if (hasCitations) {
       state = state
@@ -845,10 +895,10 @@ class HoveringMenu extends React.Component {
         .unwrapInline('citation')
         .collapseToEnd()
         .focus()
-        .apply();
-      this.setState({ state });
+        .apply()
+      this.setState({ state })
     } else {
-      this.setState({ showCitationTool: true });
+      this.setState({ showCitationTool: true })
     }
   }
 
@@ -860,6 +910,7 @@ class HoveringMenu extends React.Component {
       </span>
     )
   }
+
 }
 
 /**

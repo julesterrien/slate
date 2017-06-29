@@ -1,0 +1,113 @@
+{
+  "document": {
+    "data": {},
+    "kind": "document",
+    "nodes": [
+      {
+        "data": {},
+        "kind": "block",
+        "isVoid": false,
+        "type": "heading-one",
+        "nodes": [
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": "Method",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "data": {},
+        "kind": "block",
+        "isVoid": false,
+        "type": "paragraph",
+        "nodes": [
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": "This should be a citation ",
+                "marks": []
+              }
+            ]
+          },
+          {
+            "data": {
+              "citation": {
+                "url": "https://ibm.com/",
+                "domain": "ibm.com",
+                "title": "IBM"
+              }
+            },
+            "kind": "inline",
+            "isVoid": false,
+            "type": "citation",
+            "nodes": [
+              {
+                "kind": "text",
+                "ranges": [
+                  {
+                    "kind": "range",
+                    "text": "here",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": " and ",
+                "marks": []
+              }
+            ]
+          },
+          {
+            "data": {
+              "citation": {
+                "url": "https://google.ca/",
+                "domain": "google.ca",
+                "title": "Google"
+              }
+            },
+            "kind": "inline",
+            "isVoid": false,
+            "type": "citation",
+            "nodes": [
+              {
+                "kind": "text",
+                "ranges": [
+                  {
+                    "kind": "range",
+                    "text": "here",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "text",
+            "ranges": [
+              {
+                "kind": "range",
+                "text": ". Thanks.",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "kind": "state"
+}

@@ -1,0 +1,204 @@
+{
+	"entityMap" : {
+		"0" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3705a5978c63400596651"
+			}
+		},
+		"1" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3703ad6e97b3200337ec4"
+			}
+		},
+		"2" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3707c5978c63400596652"
+			}
+		},
+		"3" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3709d5978c63400596654"
+			}
+		},
+		"4" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a370c6d6e97b3200337eca"
+			}
+		},
+		"5" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a370e6d6e97b3200337ecd"
+			}
+		},
+		"6" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a371075978c6340059665d"
+			}
+		},
+		"7" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a371305978c6340059665f"
+			}
+		},
+		"8" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a371535978c63400596660"
+			}
+		},
+		"9" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3717bd6e97b3200337ee2"
+			}
+		},
+		"10" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a371a5d6e97b3200337eea"
+			}
+		},
+		"11" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a371c6d6e97b3200337eec"
+			}
+		},
+		"12" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a371f1d6e97b3200337eed"
+			}
+		},
+		"13" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3725ad6e97b3200337ef1"
+			}
+		},
+		"14" : {
+			"type" : "WONDER_SOURCE_CITE",
+			"mutability" : "MUTABLE",
+			"data" : {
+				"citationResourceId" : "57a3727a5978c63400596669"
+			}
+		}
+	},
+	"blocks" : [
+		{
+			"key" : "c36bv",
+			"text" : "Hi there, thank you for your question about the benefits of volunteering to the volunteer. All up, one of the key benefits of volunteering (I add my own experience here!) is adding purpose to one's life, and/or doing something meaningful or useful. Other benefits include longevity, lower blood pressure, less stress, a greater appreciation of time, perspective, and better self esteem. Please find my deep dive below. \n  \nHEALTH BENEFITS \nLive longer: Over 40 international studies confirm that volunteering can add years to your life, or a 22% reduction in mortality rates. As little as 25 hours a year can be beneficial.  People who volunteer after a heart attack have reported a reduction in despair and depression — factors that have been linked to an increased likelihood of death in heart attack patients. This is according to The Health Benefits of Volunteering: A Review of Recent Research \nVolunteering can help people cope with a chronic illness, by helping them take their mind off a problem.  A study by Pain Management Nursing found that people's pain ratings dropped from 6 to 4 after volunteering – such activity also helps people feel more in control of their pain. \nLower blood pressure: A study by Psychology and Aging found that adults over 50 who did 200 hours over a year were 40% less likely to have hypertension than non-volunteers. The lowered stress combined with being active are thought to be the keys here. \nCholesterol: Canadian tenth-graders in a recent study lost weight and had better cholesterol profiles compared to their non volunteering peers.  \nAnother controlled study found that older people who tutored children through a program showed improved stamina, memory, flexibility, and lower levels of depression. ",
+			"type" : "unstyled",
+			"depth" : 0,
+			"inlineStyleRanges" : [ ],
+			"entityRanges" : [
+				{
+					"offset" : 475,
+					"length" : 8,
+					"key" : 0
+				},
+				{
+					"offset" : 833,
+					"length" : 66,
+					"key" : 1
+				},
+				{
+					"offset" : 996,
+					"length" : 7,
+					"key" : 2
+				},
+				{
+					"offset" : 1017,
+					"length" : 23,
+					"key" : 3
+				},
+				{
+					"offset" : 1323,
+					"length" : 13,
+					"key" : 4
+				},
+				{
+					"offset" : 1485,
+					"length" : 6,
+					"key" : 5
+				},
+				{
+					"offset" : 1602,
+					"length" : 6,
+					"key" : 6
+				}
+			]
+		},
+		{
+			"key" : "f0ods",
+			"text" : "\nEMOTIONAL AND PSYCHOLOGICAL BENEFITS \nAdded meaning to life -Having a social impact and connecting with others is one of the best things for one's mental health. Citizens Advice Bureau published a study that also found that volunteering boosts self esteem. In an alienated world, the value of developing social bonds and an expanded social life shouldn't be underestimated. \nVolunteering helps people manage and lower stress levels. Helping others, our body releases oxytocin, which buffers stress. \nPerspective – working with others can help us re-examine and reflect on our own lives. \nHappiness: According to professor Stephen Post, a part of our brain lights up when we help others, then doles out dopamine and possibly serotonin. Some people feel more serene, others more warm and trusting. \nCareer benefits – if the skills match a person's career, volunteering can boost their resume. A lot of volunteering also entails hidden but valued skills such as leadership, teamwork, and good, empathetic communication. A survey carried out by TimeBank through Reed Executive showed that among 200 of the UK’s leading businesses - 73% of employers would recruit a candidate with volunteering experience over one without,  and 94% of employers believe that volunteering can add to skills. \nA change of scenery: Variety is important in life, and especially for people doing environmental volunteering (animals, tree planting, restoration, research etc), the break in routine and escape from the city can be very satisfying.  \nTrying new things: as well as working with different types of people, gives the volunteer an opportunity to grow. \nA greater contentment with overall life: A study in the Gerontologist focused on people over the age of 50 found that after a year of volunteering they all felt greater self esteem, personal growth, and a sense of being productive. The research found that volunteers were more likely to feel such things when given adequate training and flexibility in choosing a schedule.  \nFeeling like you have more time – like those who give to charity often feeling wealthier, Cassie Mogilner's research found that people feel less time constraint and more time affluent when they volunteer than when they waste their time or spend it on themselves.  \n  \nEXTRA DATA \nIn the United States, 62.6 million people volunteered through an organization at least once from September 2014- 2015. Women volunteered at a higher rate than men. 35-54 year-olds were the most likely to volunteer. Married and white people also volunteered at high rates. It appears that stability and poverty levels play a role in people's desire or ability to volunteer. The average amount of volunteering was 1 hour per week. Religious organisations were the main places people volunteered, followed by educational and youth services. \nAccording to the Charities Aid Foundation, at a global level, in 2014,  2.3 billion people helped a stranger, 1.4 billion donated money, and 1 billion people volunteered. Myanmar was the top country for donating money, and second in time, while the US was the top country for helping a stranger and 5th for volunteers. \nIt's also important to note that most of these benefits come when a person chooses to volunteer and cares a lot about those people they are working with. Feeling exploited or being obliged to do the work detract from any benefits. I would add that the type of work does make a difference, and working with organisations dealing with people who have been through a lot of violence and hardship can be tough – especially when those organizations are struggling – for resource reasons usually – to meet the needs of those they are trying to help. \n  \nCONCLUSION \nNaturally, most of the health benefits are connected to the psychological benefits. There's also always the issue of cause or consequence – are people who are more mentally healthy more likely to volunteer in the first place? Hence, here I've focused on those studies that show a change over time. Thanks for using Wonder! Please let us know if we can help with anything else!    ",
+			"type" : "unstyled",
+			"depth" : 0,
+			"inlineStyleRanges" : [ ],
+			"entityRanges" : [
+				{
+					"offset" : 245,
+					"length" : 11,
+					"key" : 7
+				},
+				{
+					"offset" : 589,
+					"length" : 9,
+					"key" : 8
+				},
+				{
+					"offset" : 1042,
+					"length" : 9,
+					"key" : 9
+				},
+				{
+					"offset" : 1308,
+					"length" : 8,
+					"key" : 10
+				},
+				{
+					"offset" : 1693,
+					"length" : 14,
+					"key" : 11
+				},
+				{
+					"offset" : 2157,
+					"length" : 5,
+					"key" : 12
+				},
+				{
+					"offset" : 2298,
+					"length" : 14,
+					"key" : 13
+				},
+				{
+					"offset" : 2879,
+					"length" : 7,
+					"key" : 14
+				}
+			]
+		}
+	]
+}
