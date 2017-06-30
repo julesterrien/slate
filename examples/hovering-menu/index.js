@@ -9,8 +9,8 @@ import { debounce, negate } from 'lodash'
 
 const DEFAULT_NODE = 'paragraph'
 
-const SPELL_CHECK_WAIT_TIME_MS = 3000
-const SPELL_CHECK_MAX_WAIT_TIME_MS = 30000
+const SPELL_CHECK_WAIT_TIME_MS = 5000
+const SPELL_CHECK_MAX_WAIT_TIME_MS = 15000
 
 // eslint-disable-next-line func-style
 const ignoreSuggestion = ({ rule: { id }}) => id === 'EN_QUOTES'
@@ -19,6 +19,9 @@ const ignoreSuggestion = ({ rule: { id }}) => id === 'EN_QUOTES'
 const typeIs = query => ({ type }) => type === query
 const typeIsOffset = typeIs('offset')
 const typeIsSpelling = typeIs('spelling')
+
+// eslint-disable-next-line func-style
+const isErrorIgnored = ({ data }) => data.get('ignored')
 
 // eslint-disable-next-line func-style
 const addX = x => y => x + y
@@ -42,11 +45,11 @@ function isSameError(chars, position, mark, op) {
   return character.marks.some(matchesErrorMark(op, mark))
 }
 
-function ignoredError(chars, offset, length, suggestion) {
+function ignoredError(chars, offset, { length, message }) {
   const character = chars.get(offset)
   return character.marks.filter(typeIsSpelling).reduce((memo, mark) => {
     return memo || (
-      mark.data.get('message') === suggestion.message &&
+      mark.data.get('message') === message &&
       mark.data.get('ignored')
     )
   }, false)
@@ -66,46 +69,18 @@ function removeSpellingSuggestion(transform, key, chars, offset, position, lengt
   }
 }
 
-function unchanged(characters, currOffset, offset, length) {
-  for (let i = 1; i < length; i++) {
-    const character = characters.get(currOffset + i)
+function unchanged(characters, currOffset, offset, position, length) {
+  for (let i = 0; i < length; i++) {
+    const character = characters.get(currOffset + i - position)
     if (!character) {
       return false
     }
     const mark = character.marks.filter(typeIsOffset).first()
-    if (!mark || (mark.data.get('offset') !== offset + i)) {
+    if (!mark || (mark.data.get('offset') !== offset - position + i)) {
       return false
     }
   }
   return true
-}
-
-function addSpellingSuggestion(key, suggestion, chars, currOffset, transform) {
-  const length = Math.min(suggestion.length, chars.size - currOffset)
-
-  for (let i = 0; i < length; i++) {
-    const mark = {
-      type: 'spelling',
-      data: {
-        length,
-        position: i,
-        message: suggestion.message,
-        shortMessage: suggestion.shortMessage,
-        replacements: suggestion.replacements,
-        rule: suggestion.rule,
-        ignored: false,
-      },
-    }
-    transform.addMarkByKey(key, currOffset + i, 1, mark)
-  }
-}
-
-function removeUnignoredSpellingMarks(transform, key, offset, character) {
-  character.marks.filter(typeIsSpelling).forEach((mark) => {
-    if (!mark.data.get('ignored')) {
-      transform.removeMarkByKey(key, offset, 1, mark)
-    }
-  })
 }
 
 /**
@@ -153,10 +128,8 @@ const schema = {
         return <span>{props.children}</span>
       }
 
-      const { id } = data.get('rule')
-
       return (
-        <span className={`spelling-error spelling-error-${id}`}>
+        <span className={`spelling-error spelling-error-${data.get('ruleId')}`}>
           {props.children}
         </span>
       )
@@ -232,7 +205,7 @@ class HoveringMenu extends React.Component {
       this.debouncedSpellCheck()
       this.maybeSelectError()
       this.removeStaleSuggestions()
-    })
+    }, 0)
   }
 
   removeStaleSuggestions = () => {
@@ -260,7 +233,7 @@ class HoveringMenu extends React.Component {
 
   spellCheck = async () => {
     let { state } = this.state
-    const text = Plain.serialize(this.state.state)
+    const text = Plain.serialize(state)
     let suggestions
 
     state = this.addCharacterOffsetMarks(state)
@@ -274,7 +247,7 @@ class HoveringMenu extends React.Component {
     }
 
     ({ state } = this.state)
-    state = this.markSpellCheckSuggestions(state, suggestions)
+    state = this.addSuggestions(state, suggestions)
     state = this.removeCharacterOffsetMarks(state)
 
     this.setState({ state })
@@ -282,10 +255,10 @@ class HoveringMenu extends React.Component {
 
   addCharacterOffsetMarksToNodes = (nodes, startingOffset) => {
     let offset = startingOffset
-    const mapped = nodes.map((child) => {
+    nodes = nodes.map((child) => {
       if (child.kind != 'text') {
-        let childNodes;
-        [childNodes, offset] = this.addCharacterOffsetMarksToNodes(child.nodes, offset)
+        let childNodes
+        ({ nodes: childNodes, offset } = this.addCharacterOffsetMarksToNodes(child.nodes, offset))
         child = child.set('nodes', childNodes)
         if (child.kind === 'block') {
           offset = offset + 1
@@ -303,14 +276,14 @@ class HoveringMenu extends React.Component {
       return child.set('characters', characters)
     })
 
-    return [mapped, offset]
+    return { nodes, offset }
   }
 
   addCharacterOffsetMarks = (state) => {
     console.time('addCharacterOffsetMarks') // eslint-disable-line no-console
     let { document } = state
     let { nodes } = document;
-    [nodes] = this.addCharacterOffsetMarksToNodes(nodes, 0)
+    ({ nodes } = this.addCharacterOffsetMarksToNodes(nodes, 0))
     document = document.set('nodes', nodes)
     state = state.set('document', document)
     console.timeEnd('addCharacterOffsetMarks') // eslint-disable-line no-console
@@ -345,31 +318,73 @@ class HoveringMenu extends React.Component {
     return state
   }
 
-  markSpellCheckSuggestions = (state, suggestions) => {
-    const transform = state.transform()
+  addSuggestionsToNodes = (nodes, suggestions) => {
+    return nodes.map((child) => {
+      if (suggestions.length === 0) {
+        return child
+      }
 
-    console.time('markSpellCheckSuggestions - highlight suggestions') // eslint-disable-line no-console
-    suggestions
-      .filter(negate(ignoreSuggestion))
-      .forEach((suggestion) => {
-        state.document.getTextsAsArray().forEach((text) => {
-          const chars = text.characters
-          chars.forEach((character, currOffset) => {
-            removeUnignoredSpellingMarks(transform, text.key, currOffset, character)
+      if (child.kind != 'text') {
+        const childNodes = this.addSuggestionsToNodes(child.nodes, suggestions)
+        child = child.set('nodes', childNodes)
+        return child
+      }
 
-            const mark = character.marks.filter(typeIsOffset).first()
-            if (mark && (mark.data.get('offset') === suggestion.offset) &&
-                unchanged(chars, currOffset, mark.data.get('offset'), suggestion.length) &&
-                !ignoredError(chars, currOffset, suggestion.length, suggestion)) {
-              addSpellingSuggestion(text.key, suggestion, chars, currOffset, transform)
-              return false
-            }
-          })
-        })
+      const characters = child.characters.map((ch, currOffset) => {
+        if (suggestions.length === 0) {
+          return ch
+        }
+
+        let suggestion = suggestions[0]
+
+        let { marks } = ch
+        const offsetMark = marks.filter(typeIsOffset).first()
+
+        marks = marks.filter(x => !typeIsSpelling(x) || isErrorIgnored(x))
+
+        if (offsetMark) {
+          const offset = offsetMark.data.get('offset')
+          const position = offset - suggestion.offset
+          const inRange = position >= 0 && position < suggestion.length
+          if (inRange &&
+              unchanged(child.characters, currOffset, offset, position, suggestion.length) &&
+              !ignoredError(child.characters, currOffset, suggestion)) {
+            const mark = Mark.create({
+              type: 'spelling',
+              data: {
+                length: suggestion.length,
+                position,
+                message: suggestion.message,
+                replacements: suggestion.replacements,
+                ruleId: suggestion.rule.id,
+                ignored: false,
+              },
+            })
+            marks = marks.add(mark)
+          }
+
+          while (suggestion.offset + suggestion.length <= offset - 1) {
+            suggestions.shift()
+            suggestion = suggestions[0]
+          }
+        }
+
+        return ch.set('marks', marks)
       })
-    console.timeEnd('markSpellCheckSuggestions - highlight suggestions') // eslint-disable-line no-console
+      return child.set('characters', characters)
+    })
+  }
 
-    return transform.apply(false)
+  addSuggestions = (state, suggestions) => {
+    console.time('addSuggestions') // eslint-disable-line no-console
+    let { document } = state
+    let { nodes } = document
+    const suggs = suggestions.filter(negate(ignoreSuggestion))
+    nodes = this.addSuggestionsToNodes(nodes, suggs)
+    document = document.set('nodes', nodes)
+    state = state.set('document', document)
+    console.timeEnd('addSuggestions') // eslint-disable-line no-console
+    return state
   }
 
   maybeSpellCheck = () => {
@@ -552,7 +567,6 @@ class HoveringMenu extends React.Component {
 
     state = state
       .transform()
-      .delete()
       .insertText(value)
       .select(selection)
       .apply()
