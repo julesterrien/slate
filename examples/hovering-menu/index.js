@@ -9,7 +9,7 @@ import { debounce, negate } from 'lodash'
 
 const DEFAULT_NODE = 'paragraph'
 
-const SPELL_CHECK_WAIT_TIME_MS = 5000
+const SPELL_CHECK_WAIT_TIME_MS = 3000
 const SPELL_CHECK_MAX_WAIT_TIME_MS = 15000
 
 // eslint-disable-next-line func-style
@@ -97,13 +97,6 @@ const schema = {
       const citation = data.get('citation')
       const { url, title } = citation
 
-      // Citation hover stuff
-      // const showCitationInfo = data.get('showCitationInfo')
-      // const unshowCitationInfo = data.get('unshowCitationInfo')
-      // const onHover = () => showCitationInfo(citation)
-      // const offHover = () => unshowCitationInfo(citation)
-      // onMouseOver={onHover} onMouseLeave={offHover}
-
       return (
         <a
           {...props.attributes}
@@ -170,14 +163,14 @@ class HoveringMenu extends React.Component {
     this.updateSpellCheckerMenu()
   }
 
+  componentDidUpdate = () => {
+    this.updateSpellCheckerMenu()
+  }
+
   componentWillUnmount = () => {
     if (this._request) {
       this._request.abort()
     }
-  }
-
-  componentDidUpdate = () => {
-    this.updateSpellCheckerMenu()
   }
 
   /**
@@ -206,6 +199,13 @@ class HoveringMenu extends React.Component {
       this.maybeSelectError()
       this.removeStaleSuggestions()
     }, 0)
+  }
+
+  onDocumentChange = (document, state) => {
+    if (this.props.onDocumentChange) {
+      const content = Raw.serialize(state)
+      this.props.onDocumentChange(content)
+    }
   }
 
   removeStaleSuggestions = () => {
@@ -237,6 +237,7 @@ class HoveringMenu extends React.Component {
     let suggestions
 
     state = this.addCharacterOffsetMarks(state)
+    state = state.set('isNative', false)
     this.setState({ state })
 
     try {
@@ -249,6 +250,7 @@ class HoveringMenu extends React.Component {
     ({ state } = this.state)
     state = this.addSuggestions(state, suggestions)
     state = this.removeCharacterOffsetMarks(state)
+    state = state.set('isNative', false)
 
     this.setState({ state })
   }
@@ -335,8 +337,6 @@ class HoveringMenu extends React.Component {
           return ch
         }
 
-        let suggestion = suggestions[0]
-
         let { marks } = ch
         const offsetMark = marks.filter(typeIsOffset).first()
 
@@ -344,8 +344,20 @@ class HoveringMenu extends React.Component {
 
         if (offsetMark) {
           const offset = offsetMark.data.get('offset')
+
+          let suggestion = suggestions[0]
+          while (suggestion && suggestion.offset + suggestion.length <= offset) {
+            suggestions.shift()
+            suggestion = suggestions[0]
+          }
+
+          if (!suggestion) {
+            return ch
+          }
+
           const position = offset - suggestion.offset
           const inRange = position >= 0 && position < suggestion.length
+
           if (inRange &&
               unchanged(child.characters, currOffset, offset, position, suggestion.length) &&
               !ignoredError(child.characters, currOffset, suggestion)) {
@@ -361,11 +373,6 @@ class HoveringMenu extends React.Component {
               },
             })
             marks = marks.add(mark)
-          }
-
-          while (suggestion.offset + suggestion.length <= offset - 1) {
-            suggestions.shift()
-            suggestion = suggestions[0]
           }
         }
 
@@ -444,9 +451,6 @@ class HoveringMenu extends React.Component {
    */
 
   render = () => {
-    // Citation overlay stuff
-    // {this.renderCitationInfo()}
-
     return (
       <div>
         {this.renderMenu()}
@@ -458,15 +462,6 @@ class HoveringMenu extends React.Component {
     )
   }
 
-  // Citation overlay stuff
-  // showCitationInfo = (citation) => {
-  //   this.setState({ showCitationInfo: citation })
-  // }
-
-  // unshowCitationInfo = (citation) => {
-  //   this.setState({ showCitationInfo: null })
-  // }
-
   onClickCitation = (e, citation) => {
     let { state } = this.state
 
@@ -476,10 +471,7 @@ class HoveringMenu extends React.Component {
         type: 'citation',
         data: {
           citation,
-          // Citation overlay stuff
-          // showCitationInfo: this.showCitationInfo,
-          // unshowCitationInfo: this.unshowCitationInfo,
-        }
+        },
       })
       .collapseToEnd()
       .focus()
@@ -500,7 +492,7 @@ class HoveringMenu extends React.Component {
     return (
       <li key={i}>
         <a onClick={onClick} href={citation.url}>
-          {citation.domain} - { citation.title}
+          {citation.domain} - {citation.title}
         </a>
       </li>
     )
@@ -658,28 +650,6 @@ class HoveringMenu extends React.Component {
     )
   }
 
-  // RENDER CITATION INFO
-  // renderCitationInfo = () => {
-  //   const { showCitationInfo } = this.state
-
-  //   return (
-  //     <Portal isOpened={!!showCitationInfo}>
-  //       <div className="menu hover-menu">
-  //         {this.renderCitationOnDisplay()}
-  //       </div>
-  //     </Portal>
-  //   )
-  // }
-
-  // renderCitationOnDisplay = () => {
-  //   const { showCitationInfo } = this.state
-
-  //   return (
-  //     <div>
-  //     </div>
-  //   )
-  // }
-
   /**
    * Render a mark-toggling toolbar button.
    *
@@ -715,6 +685,7 @@ class HoveringMenu extends React.Component {
           ref={setEditorRef}
           state={this.state.state}
           onChange={this.onChange}
+          onDocumentChange={this.onDocumentChange}
           spellCheck={false}
         />
       </div>
