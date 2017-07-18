@@ -27,7 +27,7 @@ function scrollToSelection(selection) {
     ? top - innerHeight / 2
     : pageYOffset
 
-  window.scrollTo(x, y)
+  // TODO window.scrollTo(x, y)
 }
 
 /**
