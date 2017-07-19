@@ -104,6 +104,7 @@
     "bench": "npm-run-all build:npm benchs",
     "benchs": "babel-node ./node_modules/.bin/_matcha --reporter ./benchmark/reporter ./benchmark/index.js > ./tmp/benchmark-comparison.json && babel-node ./benchmark/compare",
     "benchs:save": "babel-node ./node_modules/.bin/_matcha --reporter ./benchmark/reporter ./benchmark/index.js > ./tmp/benchmark-baseline.json",
+    "prepare": "npm run build",
     "prepublish": "npm run build",
     "postpublish": "npm run gh-pages",
     "release": "np",
